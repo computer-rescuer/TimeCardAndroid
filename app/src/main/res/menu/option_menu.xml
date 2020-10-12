@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/area1"
+        android:title="@string/area1_form" />
+    <item
+        android:id="@+id/area2"
+        android:title="@string/area2_form" />
+    <item
+        android:id="@+id/area3"
+        android:title="@string/area3_form" />
+</menu>

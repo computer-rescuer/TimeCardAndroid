@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">TimeCard</string>
+    <string name="word">word: </string>
+    <string name="hint">自動入力</string>
+    <string name="post">post data</string>
+    <string name="browser">browser</string>
+    <string name="setting_btn">設定</string>
+    <string name="mds_name">名前</string>
+    <string name="userID">Uid：</string>
+    <string name="userID_form">ユーザIDを入力してください。</string>
+    <string name="password">Pwd：</string>
+    <string name="password_form">パスワードを入力してください。</string>
+    <string name="name">Name：</string>
+    <string name="name_form">氏名を入力してください。</string>
+    <string name="ID">社員番号：</string>
+    <string name="ID_form">年齢を入力してください。</string>
+    <string name="age2">歳</string>
+    <string name="area">場所</string>
+    <string name="area_form">場所が入力されます</string>
+    <string name="area1">場所1：</string>
+    <string name="area1_form">%1$d</string>
+    <string name="area2">場所2：</string>
+    <string name="area2_form">%2$d</string>
+    <string name="area3">場所3：</string>
+    <string name="area3_form">%3$d</string>
+    <string name="button_save">保存</string>
+    <string name="clear">クリア</string>
+    <string name="no_text">"No text !"</string>
+    <string name="saved">Saved</string>
+    <string name="read_error">Read file error !</string>
+    <string name="save_file">Save file</string>
+    <string name="read_file">Read file</string>
+</resources>
