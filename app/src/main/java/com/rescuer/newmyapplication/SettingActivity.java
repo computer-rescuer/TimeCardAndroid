@@ -47,7 +47,7 @@ public class SettingActivity extends AppCompatActivity {
     private String  PlusText7;
     private String  PlusText;
 
-    private String fileName = "UserDate.txt";
+    private String setting_filename = "setting.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +118,7 @@ public class SettingActivity extends AppCompatActivity {
                 // エディットテキストのテキストを取得
                 String text = PlusText;
 
-                saveFile(fileName, text);
+                saveFile(setting_filename, text);
                 if(text.length() == 0){
                     textView.setText(R.string.no_text);
                 }
@@ -133,9 +133,16 @@ public class SettingActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String str = readFile(fileName);
+                String str = readFile(setting_filename);
                 if (str != null) {
-                    textView.setText(str);
+                    String[] list = str.split(",");
+                    editText1.setText(list[0]);
+                    editText2.setText(list[1]);
+                    editText3.setText(list[2]);
+                    editText4.setText(list[3]);
+                    editText5.setText(list[4]);
+                    editText6.setText(list[5]);
+                    editText7.setText(list[6]);
                 } else {
                     textView.setText(R.string.read_error);
                 }
@@ -187,7 +194,7 @@ public class SettingActivity extends AppCompatActivity {
 
             String str = et.getText().toString();
             try{
-                FileOutputStream out = openFileOutput( "test.txt", MODE_PRIVATE );
+                FileOutputStream out = openFileOutput( setting_filename, MODE_PRIVATE );
                 out.write( str.getBytes()   );
             }catch( IOException e ){
                 e.printStackTrace();
@@ -200,7 +207,7 @@ public class SettingActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             try{
-                FileInputStream in = openFileInput( "test.txt" );
+                FileInputStream in = openFileInput( setting_filename );
                 BufferedReader reader = new BufferedReader( new InputStreamReader( in , "UTF-8") );
                 String tmp;
                 et.setText("");
@@ -216,7 +223,7 @@ public class SettingActivity extends AppCompatActivity {
     class DeleteClick implements OnClickListener{
         @Override
         public void onClick(View v) {
-            deleteFile( "test.txt" );
+            deleteFile( setting_filename );
         }
     }
 
@@ -233,4 +240,5 @@ public class SettingActivity extends AppCompatActivity {
             startActivityForResult(intent,FORM_REQUESTCODE);
         }
     }
+
 }
