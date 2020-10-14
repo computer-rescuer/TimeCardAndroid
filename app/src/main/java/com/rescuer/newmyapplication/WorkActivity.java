@@ -4,13 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 
 public class WorkActivity extends AppCompatActivity {
     EditText et;
+    EditText showDate;
 
     private final int FORM_REQUESTCODE = 1000;
     private TextView textView;
@@ -44,12 +48,16 @@ public class WorkActivity extends AppCompatActivity {
     private String  PlusText7;
     private String  PlusText;
 
-    private String fileName = "UserDate.txt";
+    private String setting_filename = "setting.txt";
+    private String work_filename = "work.txt";
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        showDate = (EditText) findViewById(R.id.showDate);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         /** Called when the activity is first created. */
@@ -87,6 +95,34 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
 
+        //EditTextにリスナーをつける
+        showDate.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            //Calendarインスタンスを取得
+                                            final Calendar date = Calendar.getInstance();
+
+                                            //DatePickerDialogインスタンスを取得
+                                            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                                                    WorkActivity.this,
+                                                    new DatePickerDialog.OnDateSetListener() {
+                                                        @Override
+                                                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                                            //setした日付を取得して表示
+                                                            showDate.setText(String.format("%d / %02d / %02d", year, month + 1, dayOfMonth));
+                                                        }
+                                                    },
+                                                    date.get(Calendar.YEAR),
+                                                    date.get(Calendar.MONTH),
+                                                    date.get(Calendar.DATE)
+                                            );
+
+                                            //dialogを表示
+                                            datePickerDialog.show();
+
+                                        }
+                                    });
+
         textView = findViewById(R.id.text_view);
         editText1 = findViewById(R.id.userID_form);
         editText2 = findViewById(R.id.password_form);
@@ -115,7 +151,7 @@ public class WorkActivity extends AppCompatActivity {
                 // エディットテキストのテキストを取得
                 String text = PlusText;
 
-                saveFile(fileName, text);
+                saveFile(work_filename, text);
                 if(text.length() == 0){
                     textView.setText(R.string.no_text);
                 }
@@ -130,9 +166,16 @@ public class WorkActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String str = readFile(fileName);
+                String str = readFile(setting_filename);
                 if (str != null) {
-                    textView.setText(str);
+                    String[] list = str.split(",");
+                    editText1.setText(list[0]);
+                    editText2.setText(list[1]);
+                    editText3.setText(list[2]);
+                    editText4.setText(list[3]);
+                    editText5.setText(list[4]);
+                    editText6.setText(list[5]);
+                    editText7.setText(list[6]);
                 } else {
                     textView.setText(R.string.read_error);
                 }
