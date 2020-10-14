@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,10 +24,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
 
 public class WorkActivity extends AppCompatActivity {
     EditText et;
-    EditText showDate;
 
     private final int FORM_REQUESTCODE = 1000;
     private TextView textView;
@@ -39,6 +38,7 @@ public class WorkActivity extends AppCompatActivity {
     private EditText editText5;
     private EditText editText6;
     private EditText editText7;
+    private EditText showDate;
     private String  PlusText1;
     private String  PlusText2;
     private String  PlusText3;
@@ -46,18 +46,16 @@ public class WorkActivity extends AppCompatActivity {
     private String  PlusText5;
     private String  PlusText6;
     private String  PlusText7;
+    private String  PlusText8;
     private String  PlusText;
 
     private String setting_filename = "setting.txt";
     private String work_filename = "work.txt";
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-
-        showDate = (EditText) findViewById(R.id.showDate);
+        setContentView(R.layout.activity_work);
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         /** Called when the activity is first created. */
@@ -95,34 +93,6 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
 
-        //EditTextにリスナーをつける
-        showDate.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            //Calendarインスタンスを取得
-                                            final Calendar date = Calendar.getInstance();
-
-                                            //DatePickerDialogインスタンスを取得
-                                            DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                                    WorkActivity.this,
-                                                    new DatePickerDialog.OnDateSetListener() {
-                                                        @Override
-                                                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                                            //setした日付を取得して表示
-                                                            showDate.setText(String.format("%d / %02d / %02d", year, month + 1, dayOfMonth));
-                                                        }
-                                                    },
-                                                    date.get(Calendar.YEAR),
-                                                    date.get(Calendar.MONTH),
-                                                    date.get(Calendar.DATE)
-                                            );
-
-                                            //dialogを表示
-                                            datePickerDialog.show();
-
-                                        }
-                                    });
-
         textView = findViewById(R.id.text_view);
         editText1 = findViewById(R.id.userID_form);
         editText2 = findViewById(R.id.password_form);
@@ -131,6 +101,7 @@ public class WorkActivity extends AppCompatActivity {
         editText5 = findViewById(R.id.area1_form);
         editText6 = findViewById(R.id.area2_form);
         editText7 = findViewById(R.id.area3_form);
+        showDate = (EditText) findViewById(R.id.show_Date);
 
 
 
@@ -146,8 +117,9 @@ public class WorkActivity extends AppCompatActivity {
                 PlusText5= editText5.getText().toString();
                 PlusText6= editText6.getText().toString();
                 PlusText7= editText7.getText().toString();
+                PlusText8= showDate.getText().toString();
                 PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
-                        + "," + PlusText5 + "," + PlusText6 + "," + PlusText7;
+                        + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
                 // エディットテキストのテキストを取得
                 String text = PlusText;
 
@@ -179,6 +151,34 @@ public class WorkActivity extends AppCompatActivity {
                 } else {
                     textView.setText(R.string.read_error);
                 }
+            }
+        });
+
+        //EditTextにリスナーをつける
+        showDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Calendarインスタンスを取得
+                final Calendar date = Calendar.getInstance();
+
+                //DatePickerDialogインスタンスを取得
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        WorkActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                //setした日付を取得して表示
+                                showDate.setText(String.format("%d / %02d / %02d", year, month+1, dayOfMonth));
+                            }
+                        },
+                        date.get(Calendar.YEAR),
+                        date.get(Calendar.MONTH),
+                        date.get(Calendar.DATE)
+                );
+
+                //dialogを表示
+                datePickerDialog.show();
+
             }
         });
 
