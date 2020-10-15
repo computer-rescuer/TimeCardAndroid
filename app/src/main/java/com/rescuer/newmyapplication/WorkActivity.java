@@ -38,7 +38,7 @@ public class WorkActivity extends AppCompatActivity {
     private EditText editText5;
     private EditText editText6;
     private EditText editText7;
-    private EditText showDate;
+    private EditText editText8;
     private String  PlusText1;
     private String  PlusText2;
     private String  PlusText3;
@@ -101,7 +101,7 @@ public class WorkActivity extends AppCompatActivity {
         editText5 = findViewById(R.id.area1_form);
         editText6 = findViewById(R.id.area2_form);
         editText7 = findViewById(R.id.area3_form);
-        showDate = (EditText) findViewById(R.id.show_Date);
+        editText8 = findViewById(R.id.date_form);
 
 
 
@@ -117,7 +117,7 @@ public class WorkActivity extends AppCompatActivity {
                 PlusText5= editText5.getText().toString();
                 PlusText6= editText6.getText().toString();
                 PlusText7= editText7.getText().toString();
-                PlusText8= showDate.getText().toString();
+                PlusText8= editText8.getText().toString();
                 PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
                         + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
                 // エディットテキストのテキストを取得
@@ -155,7 +155,7 @@ public class WorkActivity extends AppCompatActivity {
         });
 
         //EditTextにリスナーをつける
-        showDate.setOnClickListener(new View.OnClickListener() {
+        editText8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Calendarインスタンスを取得
@@ -168,7 +168,7 @@ public class WorkActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 //setした日付を取得して表示
-                                showDate.setText(String.format("%d / %02d / %02d", year, month+1, dayOfMonth));
+                                editText8.setText(String.format("%d / %02d / %02d", year, month+1, dayOfMonth));
                             }
                         },
                         date.get(Calendar.YEAR),

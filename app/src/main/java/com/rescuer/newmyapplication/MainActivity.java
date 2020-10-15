@@ -19,8 +19,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.*;
@@ -35,16 +33,14 @@ public class MainActivity extends AppCompatActivity {
     private static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd");
     private static SimpleDateFormat sdf4 = new SimpleDateFormat("HHmm");
     private static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMddHHmm");
-    private UploadTask task;
-    private TextView textView;
-    private EditText editText;
-    private EditText editText2;
-    private EditText setting_txt;
-    private final int FORM_REQUESTCODE = 1000;
-    // phpがPOSTで受け取ったwordを入れて作成するHTMLページ(適宜合わせてください)
+    // phpがPOSTで受け取ったwデータを入れて作成する
     String url = "http://153.156.43.33/Android/pass_check.csv";
-    EditText et;
-
+    private UploadTask task_UploadTask;
+    private DownloadTask task_DownloadTask;
+    private TextView text_Attendance;
+    private EditText text_userID;
+    private EditText text_area;
+    private final int FORM_REQUESTCODE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,22 +101,29 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        setting_txt= findViewById(R.id.setting_txt);
+// Set  TEXT
+        String param1 = "10";
+        task_DownloadTask = new DownloadTask(this) ;
+        //     task_DownloadTask.setListener_d(createListener_d);
+        task_DownloadTask.execute(param1);
+// write  TEXT for DownloadTask
         try{
-            FileInputStream in = openFileInput( "test.txt" );
+            text_Attendance = findViewById(R.id.list_Attendance);
+            // SubClass のメソッド name() を呼び出す
+            FileInputStream in = openFileInput( "DownloadTask.csv" );
             BufferedReader reader = new BufferedReader( new InputStreamReader( in , "UTF-8") );
             String tmp;
-           // et.setText("");
-            setting_txt.setText("");
+            text_Attendance.setText("");
             while( (tmp = reader.readLine()) != null ){
-                setting_txt.append(tmp + "\n");
+                text_Attendance.append(tmp + "\n");
             }
             reader.close();
         }catch( IOException e ){
             e.printStackTrace();
         }
-        editText = findViewById(R.id.userID);
-        editText2 = findViewById(R.id.area);
+// add k.sakamoto  2020/10/15 end
+        text_userID = findViewById(R.id.userID);
+        text_area = findViewById(R.id.area);
 
         //現在日時の取得
         final Date d = new Date();
@@ -130,13 +133,13 @@ public class MainActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String param0 = "10" + "," + editText.getText().toString() + "," + sdf3.format(d) +
-                "," + sdf4.format(d) + "," + editText2.getText().toString() + "," + sdf5.format(d);
+                String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
+                "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
 
                 if(param0.length() != 0){
-                    task = new UploadTask();
-                    task.setListener(createListener());
-                    task.execute(param0);
+                    task_UploadTask = new UploadTask();
+                    task_UploadTask.setListener(createListener());
+                    task_UploadTask.execute(param0);
                 }
             }
         });
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
                 // text clear
-                textView.setText("");
+                text_Attendance.setText("");
 
             }
         });
@@ -167,12 +170,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        textView = findViewById(R.id.text_view);
+        text_Attendance = findViewById(R.id.text_view);
     }
 
     @Override
     protected void onDestroy() {
-        task.setListener(null);
+        task_UploadTask.setListener(null);
         super.onDestroy();
         // 定期実行をcancelする
         if (mTimer != null) {
@@ -185,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         return new UploadTask.Listener() {
             @Override
             public void onSuccess(String result) {
-                textView.setText(result);
+                text_Attendance.setText(result);
             }
         };
     }

@@ -2,94 +2,89 @@ package com.rescuer.newmyapplication;
 
 //package your.package.name;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
-public class DownloadTask extends AsyncTask<String, Void, Bitmap> {
+public class DownloadTask extends AsyncTask<String, Void, String> {
 
     private Listener listener;
+    String OUT_FILE_NAME = "DownloadTask.csv";
+    String urlSt = "http://153.156.43.33/Android/pass_list.csv";
+    @NonNull private final Context context;
+    public DownloadTask(@NonNull Context context) { this.context = context; }
 
     // 非同期処理
-    @Override
-    protected Bitmap doInBackground(String... params) {
-
-        return downloadImage(params[0]) ;
-    }
-
-    // 途中経過をメインスレッドに返す
-    @Override
-    protected void onProgressUpdate(Void... progress) {
-        //working cursor を表示させるようにしてもいいでしょう
-    }
-
-    // 非同期処理が終了後、結果をメインスレッドに返す
-    @Override
-    protected void onPostExecute(Bitmap bmp) {
-        if (listener != null) {
-            listener.onSuccess(bmp);
-        }
-    }
-
-    private Bitmap downloadImage(String address) {
-        Bitmap bmp = null;
-
-        HttpURLConnection urlConnection = null;
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    //  @Override
+    protected String doInBackground(String... params) {
+        // 使用するサーバーのURLに合わせる
+        String result = null;
         try {
-            URL url = new URL( address );
+            // URL設定
+            URL url = new URL(urlSt);
+            HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+// HTTPのメソッドをGETに
+            urlCon.setRequestMethod("GET");
+// 接続
+            urlCon.connect();
+// HTTPレスポンスコード
+            final int status = urlCon.getResponseCode();
+            if (status == HttpURLConnection.HTTP_OK) {
 
-            // HttpURLConnection インスタンス生成
-            urlConnection = (HttpURLConnection) url.openConnection();
-
-            // タイムアウト設定
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(20000);
-
-            // リクエストメソッド
-            urlConnection.setRequestMethod("GET");
-
-            // リダイレクトを自動で許可しない設定
-            urlConnection.setInstanceFollowRedirects(false);
-
-            // ヘッダーの設定(複数設定可能)
-            urlConnection.setRequestProperty("Accept-Language", "jp");
-
-            // 接続
-            urlConnection.connect();
-
-            int resp = urlConnection.getResponseCode();
-
-            switch (resp){
-                case HttpURLConnection.HTTP_OK:
-                    try(InputStream is = urlConnection.getInputStream()){
-                        bmp = BitmapFactory.decodeStream(is);
-                        is.close();
-                    } catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    break;
-                case HttpURLConnection.HTTP_UNAUTHORIZED:
-                    break;
-                default:
-                    break;
+                // 通信に成功した
+                // ファイルのダウンロード処理を実行
+                // 読み込み用ストリーム
+                final InputStream input = urlCon.getInputStream();
+                final DataInputStream dataInput = new DataInputStream(input);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlCon.getInputStream(), "UTF-8"));
+                String wk_line;
+                StringBuilder wk_txt = new StringBuilder();
+                while ((wk_line = reader.readLine()) != null) {
+                    wk_txt.append(wk_line);
+                    wk_txt.append("\n");
+                }
+                try (final OutputStream os = context.openFileOutput(OUT_FILE_NAME, Context.MODE_PRIVATE);
+                     final OutputStreamWriter osw = new OutputStreamWriter(os, StandardCharsets.UTF_8);
+                     final PrintWriter writer = new PrintWriter(osw)) {
+                    writer.write(wk_txt.toString());
+                }
+                // 各ストリームを閉じる
+                reader.close();
+                result = "HTTP_OK";
+                return result;
             }
-        } catch (Exception e) {
-            Log.d("debug", "downloadImage error");
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
         }
+        return result;
+    }
+    // 非同期処理が終了後、結果をメインスレッドに返す
 
-        return bmp;
+    @Override
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+        if (listener != null) {
+            listener.onSuccess(result);
+        }
     }
 
     void setListener(Listener listener) {
@@ -97,6 +92,6 @@ public class DownloadTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     interface Listener {
-        void onSuccess(Bitmap bmp);
+        void onSuccess(String result);
     }
 }

@@ -167,12 +167,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
 
-    <EditText
-        android:id="@+id/setting_csv"
+    <TextView
+        android:id="@+id/list_Attendance"
         android:layout_width="340dp"
         android:layout_height="120dp"
         android:background="#fff"
-        android:inputType="textUri"
+        android:inputType="textMultiLine"
         android:textSize="24sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
