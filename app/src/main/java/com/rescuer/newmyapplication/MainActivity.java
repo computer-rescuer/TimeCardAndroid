@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -140,6 +142,12 @@ public class MainActivity extends AppCompatActivity {
                     task_UploadTask = new UploadTask();
                     task_UploadTask.setListener(createListener());
                     task_UploadTask.execute(param0);
+                    Toast myToast = Toast.makeText(
+                            getApplicationContext(),
+                            "出勤報告いたしました。",
+                            Toast.LENGTH_SHORT
+                    );
+                    myToast.show();
                 }
             }
         });

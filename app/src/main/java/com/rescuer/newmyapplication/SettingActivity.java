@@ -23,6 +23,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -123,7 +124,12 @@ public class SettingActivity extends AppCompatActivity {
                     textView.setText(R.string.no_text);
                 }
                 else{
-                    textView.setText(R.string.saved);
+                    Toast myToast = Toast.makeText(
+                            getApplicationContext(),
+                            "保存しました。",
+                            Toast.LENGTH_SHORT
+                    );
+                    myToast.show();
                 }
             }
         });
