@@ -53,6 +53,7 @@ public class WorkActivity extends AppCompatActivity {
     private String setting_filename = "setting.txt";
     private String work_filename = "work.txt";
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,26 +140,21 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonRead = findViewById(R.id.button_read);
-        buttonRead.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onClick(View v) {
-                String str = readFile(setting_filename);
-                if (str != null) {
-                    String[] list = str.split(",");
-                    editText1.setText(list[0]);
-                    editText2.setText(list[1]);
-                    editText3.setText(list[2]);
-                    editText4.setText(list[3]);
-                    editText5.setText(list[4]);
-                    editText6.setText(list[5]);
-                    editText7.setText(list[6]);
-                } else {
-                    textView.setText(R.string.read_error);
-                }
+        String str = readFile(setting_filename);
+        if (str != null) {
+            String[] list = str.split(",");
+            if(list.length != 0) {
+                if(list.length > 0)editText1.setText(list[0]);
+                if(list.length > 1)editText2.setText(list[1]);
+                if(list.length > 2)editText3.setText(list[2]);
+                if(list.length > 3)editText4.setText(list[3]);
+                if(list.length > 4)editText5.setText(list[4]);
+                if(list.length > 5)editText6.setText(list[5]);
+                if(list.length > 6)editText7.setText(list[6]);
             }
-        });
+        } else {
+            textView.setText(R.string.read_error);
+        }
 
         //EditTextにリスナーをつける
         editText8.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +183,27 @@ public class WorkActivity extends AppCompatActivity {
 
             }
         });
+
+        Button buttonClear = findViewById(R.id.clear);
+        buttonClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText1.getEditableText().clear();
+                editText2.getEditableText().clear();
+                editText3.getEditableText().clear();
+                editText4.getEditableText().clear();
+                editText5.getEditableText().clear();
+                editText6.getEditableText().clear();
+                editText7.getEditableText().clear();
+                Toast myToast = Toast.makeText(
+                        getApplicationContext(),
+                        "入力内容をクリアしました",
+                        Toast.LENGTH_SHORT
+                );
+                myToast.show();
+            }
+        });
+
 
     }
 
