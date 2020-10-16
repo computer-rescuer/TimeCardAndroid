@@ -94,7 +94,7 @@ public class WorkActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        String str = readFile(setting_filename);
         textView = findViewById(R.id.text_view);
         editText1 = findViewById(R.id.userID_form);
         editText2 = findViewById(R.id.password_form);
@@ -112,13 +112,15 @@ public class WorkActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                PlusText1= editText1.getText().toString();
-                PlusText2= editText2.getText().toString();
+                String str = readFile(setting_filename);
+                String[] list = str.split(",");
+                PlusText1= list[0];
+                PlusText2= list[1];
                 PlusText3= editText3.getText().toString();
-                PlusText4= editText4.getText().toString();
-                PlusText5= editText5.getText().toString();
-                PlusText6= editText6.getText().toString();
-                PlusText7= editText7.getText().toString();
+                PlusText4= list[3];
+                PlusText5= list[4];
+                PlusText6= list[5];
+                PlusText7= list[6];
                 PlusText8= editText8.getText().toString();
                 PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
                         + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
@@ -140,17 +142,10 @@ public class WorkActivity extends AppCompatActivity {
             }
         });
 
-        String str = readFile(setting_filename);
         if (str != null) {
             String[] list = str.split(",");
             if(list.length != 0) {
-                if(list.length > 0)editText1.setText(list[0]);
-                if(list.length > 1)editText2.setText(list[1]);
                 if(list.length > 2)editText3.setText(list[2]);
-                if(list.length > 3)editText4.setText(list[3]);
-                if(list.length > 4)editText5.setText(list[4]);
-                if(list.length > 5)editText6.setText(list[5]);
-                if(list.length > 6)editText7.setText(list[6]);
             }
         } else {
             textView.setText(R.string.read_error);
