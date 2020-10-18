@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static SimpleDateFormat sdf4 = new SimpleDateFormat("HHmm");
     private static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMddHHmm");
     // phpがPOSTで受け取ったwデータを入れて作成する
-    String url = "http://153.156.43.33/Android/pass_check.csv";
+    String url = "http://xxx.xxx.xxx.xxx/Android/pass_check.csv";
     private UploadTask task_UploadTask;
     private DownloadTask task_DownloadTask;
     private TextView text_Attendance;

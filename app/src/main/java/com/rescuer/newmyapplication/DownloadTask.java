@@ -28,7 +28,7 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
     private Listener listener;
     String OUT_FILE_NAME = "DownloadTask.csv";
-    String urlSt = "http://153.156.43.33/Android/pass_list.csv";
+    String urlSt = "http://xxx.xxx.xxx.xxx/Android/pass_list.csv";
     @NonNull private final Context context;
     public DownloadTask(@NonNull Context context) { this.context = context; }
 
