@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView text_Attendance;
     private EditText text_userID;
     private EditText text_area;
-    private MenuItem menuItem1;
-    private MenuItem menuItem2;
-    private MenuItem menuItem3;
+    private MenuItem item1;
+    private MenuItem item2;
+    private MenuItem item3;
     private final int FORM_REQUESTCODE = 1000;
 
     private String setting_filename = "setting.txt";
@@ -219,14 +219,25 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-
-
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // オプションメニューを作成する
         getMenuInflater().inflate(R.menu.option_menu,menu);
 
-        return super.onCreateOptionsMenu(menu);
+        item1 = findViewById(R.id.area1);
+        item2 = findViewById(R.id.area2);
+        item3 = findViewById(R.id.area3);
+
+        String str = readFile(setting_filename);
+        if (str != null){
+            String[] list = str.split(",");
+            item1 = menu.findItem(R.id.area1).setTitle(list[4]);
+            item2 = menu.findItem(R.id.area2).setTitle(list[5]);
+            item3 = menu.findItem(R.id.area3).setTitle(list[6]);
+        }
+        super.onCreateOptionsMenu(menu);
+
+        return true;
     }
 
     @Override
@@ -240,34 +251,29 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        menuItem1 = findViewById(R.id.area1);
-        menuItem2 = findViewById(R.id.area2);
-        menuItem3 = findViewById(R.id.area3);
 
         String str= "";
         String read = readFile(setting_filename);
         if (read != null) {
             String[] list = read.split(",");
-
             // オプションメニュー
             switch (item.getItemId()) {
                 case R.id.area1:
-                    menuItem1.setTitle(list[4]);
+                    str = "場所1";
+                    text_area.setText(list[4]);
                     break;
                 case R.id.area2:
-                    menuItem2.setTitle(list[5]);
+                    str = "場所2";
+                    text_area.setText(list[5]);
                     break;
                 case R.id.area3:
-                    menuItem3.setTitle(list[6]);
-                    break;
-                case android.R.id.home:
-                    str = "戻る";
+                    str = "場所3";
+                    text_area.setText(list[6]);
                     break;
             }
         }
 
         new AlertDialog.Builder(MainActivity.this)
-                .setTitle("情報")
                 .setMessage(str +"が選択されました。")
                 .setPositiveButton("OK", null)
                 .show();
