@@ -2,6 +2,7 @@ package com.rescuer.newmyapplication;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ContextMenu;
@@ -15,12 +16,14 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.*;
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_userID;
     private EditText text_area;
     private final int FORM_REQUESTCODE = 1000;
+
+    private String setting_filename = "setting.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,28 +131,38 @@ public class MainActivity extends AppCompatActivity {
 // add k.sakamoto  2020/10/15 end
         text_userID = findViewById(R.id.userID);
         text_area = findViewById(R.id.area);
-
         //現在日時の取得
         final Date d = new Date();
 
         Button post = findViewById(R.id.post);
         // ボタンをタップして非同期処理を開始
         post.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
-                "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
-
-                if(param0.length() != 0){
-                    task_UploadTask = new UploadTask();
-                    task_UploadTask.setListener(createListener());
-                    task_UploadTask.execute(param0);
-                    Toast myToast = Toast.makeText(
-                            getApplicationContext(),
-                            "出勤報告いたしました。",
-                            Toast.LENGTH_SHORT
-                    );
-                    myToast.show();
+                text_Attendance = findViewById(R.id.list_Attendance);
+                String str = readFile(setting_filename);
+                if (str != null) {
+                    String[] list = str.split(",");
+                    if (list.length != 0) {
+                        text_userID.setText(list[1]);
+                    }
+                    String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
+                            "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
+                    String param1 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
+                            "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
+                    if (param0.length() != 0) {
+                        task_UploadTask = new UploadTask();
+                        task_UploadTask.setListener(createListener());
+                        task_UploadTask.execute(param0);
+                        Toast myToast = Toast.makeText(
+                                getApplicationContext(),
+                                "出勤報告いたしました。",
+                                Toast.LENGTH_SHORT
+                        );
+                        myToast.show();
+                    }
+                    text_Attendance.setText(param1);
                 }
             }
         });
@@ -196,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         return new UploadTask.Listener() {
             @Override
             public void onSuccess(String result) {
-                text_Attendance.setText(result);
+//                text_Attendance.setText(result);
             }
         };
     }
@@ -204,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // オプションメニューを作成する
         getMenuInflater().inflate(R.menu.option_menu,menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -253,6 +269,27 @@ public class MainActivity extends AppCompatActivity {
                 .show();
 
         return super.onContextItemSelected(item);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public String readFile(String file) {
+        String text = null;
+
+        // try-with-resources
+        try (FileInputStream fileInputStream = openFileInput(file);
+             BufferedReader reader= new BufferedReader(
+                     new InputStreamReader(fileInputStream, StandardCharsets.UTF_8))) {
+
+            String lineBuffer;
+            while( (lineBuffer = reader.readLine()) != null ) {
+                text = lineBuffer ;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return text;
     }
 }
 
