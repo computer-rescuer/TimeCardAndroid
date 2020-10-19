@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/post"
         android:layout_width="37dp"
         android:layout_height="18dp"
         android:background="@drawable/button_design2"
@@ -114,7 +114,7 @@
         android:colorControlNormal="#FFFFFF"
         android:ems="10"
         android:focusable="false"
-        android:inputType="textPersonName"
+        android:inputType="date"
         android:textColor="#FFF"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"

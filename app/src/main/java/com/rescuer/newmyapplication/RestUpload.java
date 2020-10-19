@@ -16,7 +16,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 
-public class UploadTask extends AsyncTask<String, Void, String> {
+public class RestUpload extends AsyncTask<String, Void, String> {
 
     private Listener listener;
 
@@ -26,7 +26,7 @@ public class UploadTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://xxx.xxx.xxx.xxx/Android/pass_check.php";
+        String urlSt = "http://xxx.xxx.xxx.xxx/Android/rest_activity.php";
 
         HttpURLConnection httpConn = null;
         String result = null;

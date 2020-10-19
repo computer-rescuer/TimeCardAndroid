@@ -50,6 +50,8 @@ public class WorkActivity extends AppCompatActivity {
     private String  PlusText8;
     private String  PlusText;
 
+    private WorkUpload task_WorkUpload;
+
     private String setting_filename = "setting.txt";
     private String work_filename = "work.txt";
 
@@ -107,37 +109,73 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-        Button buttonSave = findViewById(R.id.button_save);
-        buttonSave.setOnClickListener(new View.OnClickListener() {
+//        Button buttonSave = findViewById(R.id.button_save);
+//        buttonSave.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+//            @Override
+//            public void onClick(View v) {
+//                String str = readFile(setting_filename);
+//                String[] list = str.split(",");
+//                PlusText1= list[0];
+//                PlusText2= list[1];
+//                PlusText3= editText3.getText().toString();
+//                PlusText4= list[3];
+//                PlusText5= list[4];
+//                PlusText6= list[5];
+//                PlusText7= list[6];
+//                PlusText8= editText8.getText().toString();
+//                PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
+//                        + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
+//                // エディットテキストのテキストを取得
+//                String text = PlusText;
+//
+//                saveFile(work_filename, text);
+//                if(text.length() == 0){
+//                    textView.setText(R.string.no_text);
+//                }
+//                else{
+//                    Toast myToast = Toast.makeText(
+//                            getApplicationContext(),
+//                            "保存しました。",
+//                            Toast.LENGTH_SHORT
+//                    );
+//                    myToast.show();
+//                }
+//            }
+//        });
+
+        Button post = findViewById(R.id.post);
+        // ボタンをタップして非同期処理を開始
+        post.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 String str = readFile(setting_filename);
-                String[] list = str.split(",");
-                PlusText1= list[0];
-                PlusText2= list[1];
-                PlusText3= editText3.getText().toString();
-                PlusText4= list[3];
-                PlusText5= list[4];
-                PlusText6= list[5];
-                PlusText7= list[6];
-                PlusText8= editText8.getText().toString();
-                PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
-                        + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
-                // エディットテキストのテキストを取得
-                String text = PlusText;
-
-                saveFile(work_filename, text);
-                if(text.length() == 0){
-                    textView.setText(R.string.no_text);
-                }
-                else{
-                    Toast myToast = Toast.makeText(
-                            getApplicationContext(),
-                            "保存しました。",
-                            Toast.LENGTH_SHORT
-                    );
-                    myToast.show();
+                if (str != null) {
+                    String[] list = str.split(",");
+                    if (list.length != 0) {
+                        PlusText1= list[0];
+                        PlusText2= list[1];
+                        PlusText3= editText3.getText().toString();
+                        PlusText4= list[3];
+                        PlusText5= list[4];
+                        PlusText6= list[5];
+                        PlusText7= list[6];
+                        PlusText8= editText8.getText().toString();
+                    }
+                    String param0 = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
+                            + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
+                    if (param0.length() != 0) {
+                        task_WorkUpload = new WorkUpload();
+                        task_WorkUpload.setListener(createListener());
+                        task_WorkUpload.execute(param0);
+                        Toast myToast = Toast.makeText(
+                                getApplicationContext(),
+                                "休出報告いたしました。",
+                                Toast.LENGTH_SHORT
+                        );
+                        myToast.show();
+                    }
                 }
             }
         });
@@ -165,7 +203,7 @@ public class WorkActivity extends AppCompatActivity {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 //setした日付を取得して表示
-                                editText8.setText(String.format("%d / %02d / %02d", year, month+1, dayOfMonth));
+                                editText8.setText(String.format("%d%02d%02d", year, month+1, dayOfMonth));
                             }
                         },
                         date.get(Calendar.YEAR),
@@ -200,6 +238,15 @@ public class WorkActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private WorkUpload.Listener createListener() {
+        return new WorkUpload.Listener() {
+            @Override
+            public void onSuccess(String result) {
+//                text_Attendance.setText(result);
+            }
+        };
     }
 
     // ファイルを保存

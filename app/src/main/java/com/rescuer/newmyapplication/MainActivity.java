@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView text_Attendance;
     private EditText text_userID;
     private EditText text_area;
+    private MenuItem menuItem1;
+    private MenuItem menuItem2;
+    private MenuItem menuItem3;
     private final int FORM_REQUESTCODE = 1000;
 
     private String setting_filename = "setting.txt";
@@ -215,6 +218,9 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // オプションメニューを作成する
@@ -231,16 +237,33 @@ public class MainActivity extends AppCompatActivity {
         menu.setHeaderTitle("コンテキストメニュー");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String str= "";
+        menuItem1 = findViewById(R.id.area1);
+        menuItem2 = findViewById(R.id.area2);
+        menuItem3 = findViewById(R.id.area3);
 
-        // オプションメニュー
-        switch (item.getItemId()){
-            case R.id.item1 : str="アイテム1";break;
-            case R.id.item2 : str="アイテム2";break;
-            case R.id.item3 : str="アイテム3";break;
-            case android.R.id.home : str="戻る";break;
+        String str= "";
+        String read = readFile(setting_filename);
+        if (read != null) {
+            String[] list = read.split(",");
+
+            // オプションメニュー
+            switch (item.getItemId()) {
+                case R.id.area1:
+                    menuItem1.setTitle(list[4]);
+                    break;
+                case R.id.area2:
+                    menuItem2.setTitle(list[5]);
+                    break;
+                case R.id.area3:
+                    menuItem3.setTitle(list[6]);
+                    break;
+                case android.R.id.home:
+                    str = "戻る";
+                    break;
+            }
         }
 
         new AlertDialog.Builder(MainActivity.this)
