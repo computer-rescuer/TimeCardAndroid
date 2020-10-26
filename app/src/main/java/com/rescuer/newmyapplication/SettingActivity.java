@@ -39,6 +39,7 @@ public class SettingActivity extends AppCompatActivity {
     private EditText editText5;
     private EditText editText6;
     private EditText editText7;
+    private EditText editText8;
     private String  PlusText1;
     private String  PlusText2;
     private String  PlusText3;
@@ -100,6 +101,8 @@ public class SettingActivity extends AppCompatActivity {
         editText5 = findViewById(R.id.area1_form);
         editText6 = findViewById(R.id.area2_form);
         editText7 = findViewById(R.id.area3_form);
+        editText8 = findViewById(R.id.host_form);
+
 
 
 
