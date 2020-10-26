@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String setting_filename = "setting.txt";
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,6 +202,14 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textView = findViewById(R.id.list_Attendance);
         textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+        String str = readFile(setting_filename);
+        if (str != null) {
+            String[] list = str.split(",");
+            if(list.length != 0) {
+                text_area.setText(list[4]);
+            }
+        }
     }
 
     @Override
