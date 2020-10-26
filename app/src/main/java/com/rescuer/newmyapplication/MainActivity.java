@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.ScrollingMovementMethod;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -197,6 +198,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         text_Attendance = findViewById(R.id.text_view);
+
+        TextView textView = findViewById(R.id.list_Attendance);
+        textView.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
     @Override
