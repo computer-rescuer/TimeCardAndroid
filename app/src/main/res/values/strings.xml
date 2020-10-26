@@ -31,4 +31,5 @@
     <string name="save_file">Save file</string>
     <string name="read_file">Read file</string>
     <string name="show_date">日付を選択してください</string>
+    <string name="host">HOST：</string>
 </resources>

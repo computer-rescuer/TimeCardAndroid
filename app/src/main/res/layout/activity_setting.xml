@@ -7,6 +7,38 @@
     android:background="#000000"
     tools:context=".SettingActivity">
 
+    <EditText
+        android:id="@+id/area3_form"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/area3_form"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.653" />
+
+    <TextView
+        android:id="@+id/host"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="@string/host"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="420dp"
@@ -19,52 +51,20 @@
         app:itemTextColor="@menu/bottom_nav_color"
         app:menu="@menu/bottom_nav_menu" />
 
-    <EditText
-        android:id="@+id/userID_form"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
     <TextView
         android:id="@+id/userID"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/userID"
-        android:textSize="15dp"
         android:textColor="#FFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.232"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-    <EditText
-        android:id="@+id/password_form"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="15dp"
-        android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.052" />
 
     <TextView
         android:id="@+id/password"
@@ -72,61 +72,30 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/password"
-        android:textSize="15dp"
         android:textColor="#FFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.224"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.152" />
 
     <EditText
-        android:id="@+id/name_form"
+        android:id="@+id/password_form"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:ems="10"
-        android:textSize="15dp"
-        android:inputType="textPersonName"
-        android:textColor="#FFF"
         android:colorControlNormal="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/name"
-        android:textSize="15dp"
-        android:textColor="#FFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <EditText
-        android:id="@+id/ID_form"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="15dp"
         android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.152" />
 
     <TextView
         android:id="@+id/ID"
@@ -134,31 +103,29 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/ID"
-        android:textSize="15dp"
         android:textColor="#FFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.353" />
 
-    <EditText
-        android:id="@+id/area1_form"
-        android:layout_width="200dp"
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="60dp"
         android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/area1_form"
-        android:textSize="15dp"
+        android:gravity="center"
+        android:text="@string/name"
         android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.193"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <TextView
         android:id="@+id/area1"
@@ -166,63 +133,79 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/area1"
-        android:textSize="15dp"
         android:textColor="#FFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.453" />
+
+    <EditText
+        android:id="@+id/userID_form"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
 
     <EditText
         android:id="@+id/area2_form"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/area2_form"
-        android:textSize="15dp"
         android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
-    <TextView
-        android:id="@+id/area2"
-        android:layout_width="55dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/area2"
-        android:textSize="15dp"
-        android:textColor="#FFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintVertical_bias="0.553" />
 
     <EditText
-        android:id="@+id/area3_form"
+        android:id="@+id/name_form"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/area3_form"
-        android:textSize="15dp"
         android:textColor="#FFF"
-        android:colorControlNormal="#FFFFFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.254" />
+
+    <EditText
+        android:id="@+id/ID_form"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.353" />
 
     <TextView
         android:id="@+id/area3"
@@ -230,14 +213,62 @@
         android:layout_height="50dp"
         android:gravity="center"
         android:text="@string/area3"
-        android:textSize="15dp"
         android:textColor="#FFF"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
+        app:layout_constraintVertical_bias="0.653" />
+
+    <TextView
+        android:id="@+id/area2"
+        android:layout_width="55dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="@string/area2"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.553" />
+
+    <EditText
+        android:id="@+id/area1_form"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/area1_form"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453" />
+
+    <EditText
+        android:id="@+id/host_form"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:colorControlNormal="#FFFFFF"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#FFF"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756" />
 
     <Button
         android:id="@+id/button_save"
@@ -249,10 +280,10 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.84" />
 
     <Button
         android:id="@+id/clear"
@@ -264,10 +295,10 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.867"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.839" />
 
     <Button
         android:id="@+id/button_read"
@@ -277,10 +308,10 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8" />
+        app:layout_constraintVertical_bias="0.838" />
 
     <TextView
         android:id="@+id/text_view"
@@ -291,9 +322,9 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.886"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.88" />
+        app:layout_constraintVertical_bias="0.903" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
