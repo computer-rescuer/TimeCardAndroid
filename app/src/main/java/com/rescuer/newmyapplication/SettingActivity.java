@@ -47,6 +47,7 @@ public class SettingActivity extends AppCompatActivity {
     private String  PlusText5;
     private String  PlusText6;
     private String  PlusText7;
+    private String  PlusText8;
     private String  PlusText;
 
     private String setting_filename = "setting.txt";
@@ -118,8 +119,9 @@ public class SettingActivity extends AppCompatActivity {
                 PlusText5= editText5.getText().toString();
                 PlusText6= editText6.getText().toString();
                 PlusText7= editText7.getText().toString();
+                PlusText8= editText8.getText().toString();
                 PlusText = PlusText1 + "," + PlusText2 + "," + PlusText3 + "," + PlusText4
-                + "," + PlusText5 + "," + PlusText6 + "," + PlusText7;
+                + "," + PlusText5 + "," + PlusText6 + "," + PlusText7 + "," + PlusText8;
                 // エディットテキストのテキストを取得
                 String text = PlusText;
 
@@ -150,6 +152,7 @@ public class SettingActivity extends AppCompatActivity {
                 if(list.length > 4)editText5.setText(list[4]);
                 if(list.length > 5)editText6.setText(list[5]);
                 if(list.length > 6)editText7.setText(list[6]);
+                if(list.length > 7)editText8.setText(list[7]);
             }
         } else {
             textView.setText(R.string.read_error);
@@ -166,6 +169,7 @@ public class SettingActivity extends AppCompatActivity {
                 editText5.getEditableText().clear();
                 editText6.getEditableText().clear();
                 editText7.getEditableText().clear();
+                editText8.getEditableText().clear();
                 Toast myToast = Toast.makeText(
                         getApplicationContext(),
                         "入力内容をクリアしました",
