@@ -3,11 +3,10 @@ package com.rescuer.newmyapplication;
 //package your.package.name;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.AsyncTask;
 import android.os.Build;
-import android.util.Log;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -28,7 +27,6 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
     private Listener listener;
     String OUT_FILE_NAME = "DownloadTask.csv";
-    String urlSt = "http://xxx.xxx.xxx.xxx/Android/pass_list.csv";
     @NonNull private final Context context;
     public DownloadTask(@NonNull Context context) { this.context = context; }
 
@@ -36,6 +34,8 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     //  @Override
     protected String doInBackground(String... params) {
+        String urlSt = "http://" + params[1] + "/Android/pass_list.csv";
+
         // 使用するサーバーのURLに合わせる
         String result = null;
         try {

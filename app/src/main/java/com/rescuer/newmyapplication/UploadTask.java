@@ -6,7 +6,6 @@ package com.rescuer.newmyapplication;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.util.Log;
-
 import androidx.annotation.RequiresApi;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class UploadTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://xxx.xxx.xxx.xxx/Android/pass_check.php";
+        String urlSt = "http://" + params[1] + "/Android/pass_check.php";
 
         HttpURLConnection httpConn = null;
         String result = null;
@@ -84,6 +83,7 @@ public class UploadTask extends AsyncTask<String, Void, String> {
         }
         return result;
     }
+
 
     // 非同期処理が終了後、結果をメインスレッドに返す
     @Override

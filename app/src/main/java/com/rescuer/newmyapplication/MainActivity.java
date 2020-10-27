@@ -39,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
     private static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd");
     private static SimpleDateFormat sdf4 = new SimpleDateFormat("HHmm");
     private static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMddHHmm");
-    // phpがPOSTで受け取ったwデータを入れて作成する
-    String url = "http://xxx.xxx.xxx.xxx/Android/pass_check.csv";
     private UploadTask task_UploadTask;
     private DownloadTask task_DownloadTask;
     private TextView text_Attendance;
     private EditText text_userID;
     private EditText text_area;
+    private String text_host;
     private MenuItem item1;
     private MenuItem item2;
     private MenuItem item3;
@@ -58,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String str = readFile(setting_filename);
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -115,9 +117,15 @@ public class MainActivity extends AppCompatActivity {
         });
 // Set  TEXT
         String param1 = "10";
-        task_DownloadTask = new DownloadTask(this) ;
-        //     task_DownloadTask.setListener_d(createListener_d);
-        task_DownloadTask.execute(param1);
+        if (str != null) {
+            String[] list = str.split(",");
+            if (list.length != 0) {
+                text_host = list[7];
+                task_DownloadTask = new DownloadTask(this);
+                //     task_DownloadTask.setListener_d(createListener_d);
+                task_DownloadTask.execute(param1,text_host);
+            }
+        }
 // write  TEXT for DownloadTask
         try{
             text_Attendance = findViewById(R.id.list_Attendance);
@@ -151,15 +159,15 @@ public class MainActivity extends AppCompatActivity {
                     String[] list = str.split(",");
                     if (list.length != 0) {
                         text_userID.setText(list[1]);
+                        text_host = list[7];
                     }
                     String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
                             "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
-                    String param1 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
-                            "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
+                    String param1 = text_host;
                     if (param0.length() != 0) {
                         task_UploadTask = new UploadTask();
                         task_UploadTask.setListener(createListener());
-                        task_UploadTask.execute(param0);
+                        task_UploadTask.execute(param0,param1);
                         Toast myToast = Toast.makeText(
                                 getApplicationContext(),
                                 "出勤報告いたしました。",
@@ -167,11 +175,13 @@ public class MainActivity extends AppCompatActivity {
                         );
                         myToast.show();
                     }
-                    text_Attendance.setText(param1);
                 }
             }
         });
         // ブラウザを起動する
+        // phpがPOSTで受け取ったwデータを入れて作成する
+        final String url = "http://" + text_host +"/Android/pass_check.csv";
+
         Button browser = findViewById(R.id.browser);
         browser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.list_Attendance);
         textView.setMovementMethod(ScrollingMovementMethod.getInstance());
 
-        String str = readFile(setting_filename);
         if (str != null) {
             String[] list = str.split(",");
             if(list.length != 0) {
