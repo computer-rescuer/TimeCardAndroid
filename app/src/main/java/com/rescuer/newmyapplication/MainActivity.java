@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private final int FORM_REQUESTCODE = 1000;
 
     private String setting_filename = "setting.txt";
-
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         if (str != null) {
             String[] list = str.split(",");
             if (list.length != 0) {
-                text_host = list[7];
+                if(list.length > 7)text_host = list[7];
                 task_DownloadTask = new DownloadTask(this);
                 //     task_DownloadTask.setListener_d(createListener_d);
                 task_DownloadTask.execute(param1,text_host);
@@ -158,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
                 if (str != null) {
                     String[] list = str.split(",");
                     if (list.length != 0) {
-                        text_userID.setText(list[1]);
-                        text_host = list[7];
+                        if(list.length > 1) text_userID.setText(list[1]);
+                        if(list.length > 7) text_host = list[7];
                     }
                     String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
                             "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
@@ -216,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
         if (str != null) {
             String[] list = str.split(",");
             if(list.length != 0) {
-                text_area.setText(list[4]);
+                if(list.length > 4)text_area.setText(list[4]);
             }
         }
     }
@@ -253,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
         String str = readFile(setting_filename);
         if (str != null){
             String[] list = str.split(",");
-            item1 = menu.findItem(R.id.area1).setTitle(list[4]);
-            item2 = menu.findItem(R.id.area2).setTitle(list[5]);
-            item3 = menu.findItem(R.id.area3).setTitle(list[6]);
+            if (list.length > 4) item1 = menu.findItem(R.id.area1).setTitle(list[4]);
+            if (list.length > 5) item2 = menu.findItem(R.id.area2).setTitle(list[5]);
+            if (list.length > 6) item3 = menu.findItem(R.id.area3).setTitle(list[6]);
         }
         super.onCreateOptionsMenu(menu);
 
