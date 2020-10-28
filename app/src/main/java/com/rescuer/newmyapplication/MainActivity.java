@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_area;
     private String text_host;
     private Button post;
+    private Button reload;
     private MenuItem item1;
     private MenuItem item2;
     private MenuItem item3;
@@ -177,6 +178,37 @@ public class MainActivity extends AppCompatActivity {
                         );
                         myToast.show();
                     }
+                }
+            }
+        });
+
+        reload = findViewById(R.id.reload);
+        reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = readFile(setting_filename);
+                if (str != null) {
+                    String[] list = str.split(",");
+                    if (list.length != 0) {
+                        if(list.length > 7)text_host = list[7];
+                        task_DownloadTask = new DownloadTask(getApplicationContext());
+                        //     task_DownloadTask.setListener_d(createListener_d);
+                        task_DownloadTask.execute("10",text_host);
+                    }
+                }
+                try{
+                    text_Attendance = findViewById(R.id.list_Attendance);
+                    // SubClass のメソッド name() を呼び出す
+                    FileInputStream in = openFileInput( "DownloadTask.csv" );
+                    BufferedReader reader = new BufferedReader( new InputStreamReader( in , "UTF-8") );
+                    String tmp;
+                    text_Attendance.setText("");
+                    while( (tmp = reader.readLine()) != null ){
+                        text_Attendance.append(tmp + "\n");
+                    }
+                    reader.close();
+                }catch( IOException e ){
+                    e.printStackTrace();
                 }
             }
         });
