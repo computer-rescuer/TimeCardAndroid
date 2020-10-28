@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText text_userID;
     private EditText text_area;
     private String text_host;
+    private Button post;
     private MenuItem item1;
     private MenuItem item2;
     private MenuItem item3;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("出勤画面");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -146,18 +148,19 @@ public class MainActivity extends AppCompatActivity {
         //現在日時の取得
         final Date d = new Date();
 
-        Button post = findViewById(R.id.post);
+        post = findViewById(R.id.post);
         // ボタンをタップして非同期処理を開始
         post.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                post.setEnabled(false);
                 text_Attendance = findViewById(R.id.list_Attendance);
                 String str = readFile(setting_filename);
                 if (str != null) {
                     String[] list = str.split(",");
                     if (list.length != 0) {
-                        if(list.length > 1) text_userID.setText(list[1]);
+                        if(list.length > 3) text_userID.setText(list[3]);
                         if(list.length > 7) text_host = list[7];
                     }
                     String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +

@@ -17,6 +17,7 @@ public class RestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("欠勤画面");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rest);
 

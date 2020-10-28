@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,7 @@ public class WorkActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("休出画面");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_work);
 
@@ -109,8 +111,9 @@ public class WorkActivity extends AppCompatActivity {
 
 
 
-        Button post = findViewById(R.id.post);
+        final Button post = findViewById(R.id.post);
         // ボタンをタップして非同期処理を開始
+
         post.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
@@ -141,6 +144,7 @@ public class WorkActivity extends AppCompatActivity {
                         );
                         myToast.show();
                     }
+                    post.setEnabled(false);
                 }
             }
         });

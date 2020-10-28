@@ -55,6 +55,7 @@ public class SettingActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("設定画面");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
