@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private static SimpleDateFormat sdf2 = new SimpleDateFormat("HH：mm");
     private static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyyMMdd");
     private static SimpleDateFormat sdf4 = new SimpleDateFormat("HHmm");
-    private static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyyMMddHHmm");
+    private static SimpleDateFormat sdf5 = new SimpleDateFormat("yyyy-MM-dd");
     private UploadTask task_UploadTask;
     private DownloadTask task_DownloadTask;
     private TextView text_Attendance;
