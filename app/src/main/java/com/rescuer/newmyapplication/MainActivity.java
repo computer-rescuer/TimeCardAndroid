@@ -11,7 +11,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private UploadTask task_UploadTask;
     private DownloadTask task_DownloadTask;
     private TextView text_Attendance;
-    private EditText text_userID;
-    private EditText text_area;
+    private TextView text_name;
+    private TextView text_userID;
+    private TextView text_area;
     private String text_host;
     private Button post;
     private Button reload;
@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         String str = readFile(setting_filename);
+
+        text_name = findViewById(R.id.name);
+        text_userID = findViewById(R.id.userID);
+        text_area = findViewById(R.id.area);
 
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -122,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         if (str != null) {
             String[] list = str.split(",");
             if (list.length != 0) {
+                if(list.length > 2)text_name.setText(list[2]);
                 if(list.length > 7)text_host = list[7];
                 task_DownloadTask = new DownloadTask(this);
                 //     task_DownloadTask.setListener_d(createListener_d);
@@ -137,15 +142,16 @@ public class MainActivity extends AppCompatActivity {
             String tmp;
             text_Attendance.setText("");
             while( (tmp = reader.readLine()) != null ){
-                text_Attendance.append(tmp + "\n");
+                String line = tmp.replace(","," ");
+                StringBuffer buffer = new StringBuffer(line);
+                buffer.insert(2,":");
+                text_Attendance.append(buffer + "\n");
             }
             reader.close();
         }catch( IOException e ){
             e.printStackTrace();
         }
 // add k.sakamoto  2020/10/15 end
-        text_userID = findViewById(R.id.userID);
-        text_area = findViewById(R.id.area);
         //現在日時の取得
         final Date d = new Date();
 
@@ -204,7 +210,10 @@ public class MainActivity extends AppCompatActivity {
                     String tmp;
                     text_Attendance.setText("");
                     while( (tmp = reader.readLine()) != null ){
-                        text_Attendance.append(tmp + "\n");
+                        String line = tmp.replace(","," ");
+                        StringBuffer buffer = new StringBuffer(line);
+                        buffer.insert(2,":");
+                        text_Attendance.append(buffer + "\n");
                     }
                     reader.close();
                 }catch( IOException e ){
