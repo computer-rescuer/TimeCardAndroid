@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private DownloadTask task_DownloadTask;
     private TextView text_Attendance;
     private TextView text_name;
-    private TextView text_userID;
+    private String text_userID;
     private TextView text_area;
     private String text_host;
     private Button post;
@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         String str = readFile(setting_filename);
 
         text_name = findViewById(R.id.name);
-        text_userID = findViewById(R.id.userID);
         text_area = findViewById(R.id.area);
 
 
@@ -167,10 +166,10 @@ public class MainActivity extends AppCompatActivity {
                 if (str != null) {
                     String[] list = str.split(",");
                     if (list.length != 0) {
-                        if(list.length > 3) text_userID.setText(list[3]);
+                        if(list.length > 3) text_userID = list[3];
                         if(list.length > 7) text_host = list[7];
                     }
-                    String param0 = "10" + "," + text_userID.getText().toString() + "," + sdf3.format(d) +
+                    String param0 = "10" + "," + text_userID + "," + sdf3.format(d) +
                             "," + sdf4.format(d) + "," + text_area.getText().toString() + "," + sdf5.format(d);
                     String param1 = text_host;
                     if (param0.length() != 0) {
@@ -183,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT
                         );
                         myToast.show();
+                        text_Attendance.setText(param0);
                     }
                 }
             }
@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         });
         // ブラウザを起動する
         // phpがPOSTで受け取ったwデータを入れて作成する
-        final String url = "http://" + text_host +"/Android/pass_check.csv";
+        final String url = "http://" + text_host +"/syain/file_dir/pass_check.csv";
 
         Button browser = findViewById(R.id.browser);
         browser.setOnClickListener(new View.OnClickListener() {

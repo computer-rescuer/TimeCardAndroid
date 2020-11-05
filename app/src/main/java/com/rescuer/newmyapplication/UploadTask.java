@@ -25,7 +25,7 @@ public class UploadTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://" + params[1] + "/Android/pass_check.php";
+        String urlSt = "http://" + params[1] + "/syain/file_dir/pass_check.php";
 
         HttpURLConnection httpConn = null;
         String result = null;

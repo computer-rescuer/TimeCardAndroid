@@ -34,7 +34,7 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     //  @Override
     protected String doInBackground(String... params) {
-        String urlSt = "http://" + params[1] + "/Android/pass_list.csv";
+        String urlSt = "http://" + params[1] + "/syain/file_dir/pass_list.csv";
 
         // 使用するサーバーのURLに合わせる
         String result = null;

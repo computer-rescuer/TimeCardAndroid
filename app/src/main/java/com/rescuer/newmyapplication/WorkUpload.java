@@ -26,7 +26,7 @@ public class WorkUpload extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         // 使用するサーバーのURLに合わせる
-        String urlSt = "http://xxx.xxx.xxx.xxx/Android/work_activity.php";
+        String urlSt = "http://xxx.xxx.xxx.xxx/syain/file_dir/work_activity.php";
 
         HttpURLConnection httpConn = null;
         String result = null;
